@@ -1,0 +1,67 @@
+ 
+<div class="container">
+  <h2>User Settings</h2>
+  <form>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-sm">
+          <label for="name">Name</label>
+          <input id="name" name="name" class="form-control" placeholder=Name [(ngModel)]="user.name" />
+        </div>
+
+        <div class="col-sm">
+          <label for="email">Email</label>
+          <input matInput id="email" name="email" type="email" class="form-control" placeholder=Email [(ngModel)]="user.email"
+          [formControl]="em" required/>
+          <mat-error *ngIf="em.invalid">{{getErrorMessage()}}</mat-error>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm">
+          <label for="customer">Customer</label>
+          <input id="customer" name="customer" class="form-control" placeholder=Customer [(ngModel)]="user.customer" />
+        </div>
+        
+
+        <div class="col-sm">
+          <label for="second_email">Alternate email</label>
+          <input id="second_email" name="second_email" type="email" class="form-control" placeholder=Second_email [(ngModel)]="user.second_email"
+          [formControl]="emm" required/>
+          <mat-error *ngIf="emm.invalid">{{getErrorMessage()}}</mat-error>
+        </div>
+      </div>
+      
+    <mat-list-item class="primary-imenu-item" role="listitem">
+      <mat-form-field class="select-form">
+          <mat-select 
+          name="role" 
+          class="filter-select" 
+          [(ngModel)]="user.roles" 
+          [compareWith]="equals"
+          multiple>
+            <mat-option disabled="disabled" class="filter-option">
+              <!--<input type="checkbox"(click)="selectAll(checkAll.checked, yearSelect, years)" #checkAll>
+              <mat-option (click)="selectAll(yearSelect, years)" #checkAll> Select All-->
+            </mat-option>
+            <mat-option *ngFor="let role of roles" [value]="role">
+              {{role.name}}
+            </mat-option>
+          </mat-select>
+      </mat-form-field>
+    </mat-list-item>
+    
+    <div class="row">
+      <button id="btnRegister" class="btn btn-primary" (click)='onBack()'>Back to list</button>
+      <div *ngIf="id"> 
+      <button class="btn btn-primary" (click)='update()'>Save</button>
+      </div>
+
+      <div *ngIf="show">
+    <button class="btn btn-primary" (click)='addUser()'>Add</button>
+      </div>
+     
+    </div>
+    </div> 
+</form>
+</div>

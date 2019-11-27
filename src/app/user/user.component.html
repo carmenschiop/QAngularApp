@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="row justify-content-end">
+    <button class="btn btn-primary" id="addBtn" (click)="addNew()">
+      <mat-icon inline=true>add</mat-icon>Add new user
+    </button>
+  </div>
+
+  <div class="row">
+    <div class="form-inline"> 
+      <input class="form-control mr-2" type="text" placeholder="Search by name, email, customer or user role" aria-label="Search"
+             [(ngModel)]="filter">
+            <button class="btn btn-primary" style="size: 5px;"><mat-icon (click)="getFiltered(filter)">search</mat-icon></button>
+          </div>
+  </div>
+  
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort id="searchForm"  class="mat-elevation-z8">
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="name">
+        <tr>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}}</td>
+        </tr>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="email">
+        <tr>
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header> Email </th>
+          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </tr>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="customer">
+        <tr>
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header> Customer </th>
+          <td mat-cell *matCellDef="let element"> {{element.customer}} </td>
+        </tr>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="user_role">
+        <tr>
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header> User role </th>
+          <td mat-cell *matCellDef="let element"> 
+            <li *ngFor="let role of element.roles">
+         <span>{{role.name}}</span>
+</li>
+          </td>
+        </tr>
+      </ng-container>
+
+      <ng-container matColumnDef="_options">
+        <tr>
+          <th mat-header-cell *matHeaderCellDef>Options </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                <mat-icon (click)="navigateToDetails(element.id)">edit</mat-icon>
+                <span>Edit</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon  (click)="deleteUser(element.id)">delete</mat-icon>
+                <span>Delete</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>settings_back</mat-icon>
+                <span>Reset</span>
+              </button>
+            </mat-menu>
+          </td>
+        </tr>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+
+</div>
+

@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/f60bdb96-bd9c-4245-bea3-3acfc1b59c4b/resourceGroups/appsvc_windows_centralus/providers/Microsoft.Web/sites/AngularUsersAPI",
+    "appService.deploySubpath": ""
+}
